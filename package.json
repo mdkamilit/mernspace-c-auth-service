@@ -19,7 +19,7 @@
     "format:fix": "prettier . --write",
     "format:check": "prettier .",
     "lint:fix": "eslint . --fix",
-    "lint:check": "eslint . --check",
+    "lint:check": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky"
   },
