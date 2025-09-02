@@ -9,7 +9,7 @@ import type { HttpError } from 'http-errors';
 const app = express();
 
 app.get('/', (req, res) => {
-   res.send('Welcome to our service');
+   res.status(200).send('Welcome to our service');
 });
 
 //Global middleware error handler
