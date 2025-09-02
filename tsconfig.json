@@ -45,8 +45,8 @@
 
       "allowImportingTsExtensions": true,
       "noEmit": true
-   },
-  //  "ts-node": {
-  //     "esm": true
-  //  }
+   }
+   //  "ts-node": {
+   //     "esm": true
+   //  }
 }
