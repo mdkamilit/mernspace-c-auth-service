@@ -2,6 +2,7 @@ function welcome(name: string) {
    // return `welcome ${name}`;
 
    console.log(name);
+   console.log('welcome');
 
    const user = {
       name: 'Rakesh',
