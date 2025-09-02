@@ -10,7 +10,6 @@ export default tseslint.config(
       ignores: ['dist', 'node_modules', 'eslint.config.mjs'],
    },
    {
-      
       languageOptions: {
          parserOptions: {
             projectService: true,
