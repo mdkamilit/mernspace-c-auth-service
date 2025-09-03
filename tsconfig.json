@@ -15,7 +15,7 @@
       // "types": [],
       "types": ["jest", "node"],
       // For nodejs:
-      // "lib": ["esnext"],
+      "lib": ["ES6"],
       // "types": ["node"],
       // and npm install -D @types/node
 
@@ -45,9 +45,9 @@
       "moduleDetection": "force",
 
       "allowImportingTsExtensions": true,
-      "noEmit": true
-   }
-   //  "ts-node": {
-   //     "esm": true
-   //  }
+      "noEmit": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+   },
+   
 }

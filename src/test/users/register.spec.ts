@@ -36,6 +36,21 @@ describe('POST /auth/register', () => {
             expect.stringContaining('json'),
          );
       });
+
+      it('should persist the user in database', async () => {
+         const userData = {
+            firstName: 'John',
+            lastName: 'Doe',
+            email: 'john.doe@example.com',
+            password: 'password123',
+         };
+         // 2. Act by sending a request to the registration endpoint
+         await request(app).post('/auth/register').send(userData);
+         // databse connection using type orm
+
+         // 3. Assert the response
+         //  expect(response.statusCode).toBe(200);
+      });
    });
 });
 describe('Fields are missing', () => {});
