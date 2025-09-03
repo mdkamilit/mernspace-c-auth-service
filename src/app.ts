@@ -6,11 +6,15 @@ import express, {
 import logger from './config/logger.ts';
 import type { HttpError } from 'http-errors';
 
+import authRouter from './routes/auth.ts';
+
 const app = express();
 
 app.get('/', (req, res) => {
    res.status(200).send('Welcome to our service');
 });
+
+app.use('/auth', authRouter);
 
 //Global middleware error handler
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
