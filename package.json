@@ -15,22 +15,25 @@
    "type": "module",
    "main": "\u001b[D\u001b[D",
    "scripts": {
-      "dev": "nodemon src/server.ts",
+      "dev": "cross-env NODE_ENV=dev nodemon src/server.ts",
       "format:fix": "prettier . --write",
       "format:check": "prettier . --check",
       "lint:fix": "eslint . --fix",
       "lint:check": "eslint .",
       "test": "jest --watch --runInBand",
-      "prepare": "husky"
+      "prepare": "husky",
+      "start": "ts-node src/index.ts",
+      "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js"
    },
    "devDependencies": {
       "@eslint/js": "^9.34.0",
       "@types/express": "^5.0.3",
       "@types/http-errors": "^2.0.5",
       "@types/jest": "^30.0.0",
-      "@types/node": "^24.3.0",
+      "@types/node": "^16.11.10",
       "@types/supertest": "^6.0.3",
       "@types/winston": "^2.4.4",
+      "cross-env": "^10.0.0",
       "eslint": "^9.34.0",
       "husky": "^9.1.7",
       "jest": "^30.1.3",
@@ -39,8 +42,8 @@
       "prettier": "3.6.2",
       "supertest": "^7.1.4",
       "ts-jest": "^29.4.1",
-      "ts-node": "^10.9.2",
-      "typescript": "^5.9.2",
+      "ts-node": "10.4.0",
+      "typescript": "4.5.2",
       "typescript-eslint": "^8.41.0"
    },
    "lint-staged": {
@@ -52,9 +55,10 @@
    "dependencies": {
       "dotenv": "^17.2.1",
       "express": "^5.1.0",
-      "pg": "^8.16.3",
-      "reflect-metadata": "^0.2.2",
-      "typeorm": "^0.3.26",
+      "pg": "^8.4.0",
+      "reflect-metadata": "^0.1.13",
+      "tslib": "^2.8.1",
+      "typeorm": "0.2.45",
       "winston": "^3.17.0"
    }
 }
