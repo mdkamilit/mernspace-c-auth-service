@@ -15,7 +15,8 @@ describe('POST /auth/register', () => {
    });
 
    afterAll(async () => {
-      await getConnection().close();
+      const conn = getConnection();
+      await conn.close();
    });
    describe('Given all fields', () => {
       it.skip('should return 200 status code', async () => {

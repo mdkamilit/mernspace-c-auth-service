@@ -3,8 +3,7 @@ import type { RegisterRequest } from '../types';
 import { UserService } from '../services/UserService';
 
 export class AuthController {
-   userService: UserService;
-   constructor(userService: UserService) {
+   constructor(private userService: UserService) {
       this.userService = userService;
    }
    async register(req: RegisterRequest, res: Response) {

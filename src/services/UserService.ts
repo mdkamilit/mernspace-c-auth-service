@@ -1,11 +1,12 @@
-import { getRepository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { User } from '../entity/User';
 import type { UserData } from '../types';
 
 export class UserService {
+   constructor(private userRepository: Repository<User>) {}
    async create({ firstName, lastName, email, password }: UserData) {
-      const userRespository = getRepository(User);
-      await userRespository.save({
+      //   const userRespository = getRepository(User);
+      await this.userRepository.save({
          firstName,
          lastName,
          email,

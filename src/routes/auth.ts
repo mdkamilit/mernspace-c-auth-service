@@ -1,13 +1,18 @@
 import express from 'express';
+import { getConnection } from 'typeorm';
 import { AuthController } from '../controllers/AuthController';
 import { UserService } from '../services/UserService';
+import { User } from '../entity/User';
 
 const router = express.Router();
 
-const userService = new UserService();
+router.post('/register', async (req, res) => {
+   const connection = getConnection();
+   const userRepository = connection.getRepository(User);
+   const userService = new UserService(userRepository);
+   const authController = new AuthController(userService);
 
-const authController = new AuthController(userService);
-
-router.post('/register', (req, res) => authController.register(req, res));
+   return authController.register(req, res);
+});
 
 export default router;
