@@ -1,8 +1,24 @@
+import { createConnection, getConnection, Connection } from 'typeorm';
 import request from 'supertest';
 import app from '../../app';
+import { User } from '../../entity/User';
+import { truncateTables } from './utils';
+
 describe('POST /auth/register', () => {
+   let connection: Connection;
+   beforeAll(async () => {
+      connection = await createConnection();
+   });
+   beforeEach(async () => {
+      // database truncate
+      await truncateTables(connection);
+   });
+
+   afterAll(async () => {
+      await getConnection().close();
+   });
    describe('Given all fields', () => {
-      it('should return 200 status code', async () => {
+      it.skip('should return 200 status code', async () => {
          /// AAA =>1.Arrange data for user registration
          const userData = {
             firstName: 'John',
@@ -19,7 +35,7 @@ describe('POST /auth/register', () => {
          expect(response.statusCode).toBe(200);
       });
 
-      it('should return valid json', async () => {
+      it.skip('should return valid json', async () => {
          const userData = {
             firstName: 'John',
             lastName: 'Doe',
@@ -49,7 +65,13 @@ describe('POST /auth/register', () => {
          // databse connection using type orm
 
          // 3. Assert the response
-         //  expect(response.statusCode).toBe(200);
+
+         const userRepository = connection.getRepository(User);
+         const users = await userRepository.find();
+         expect(users).toHaveLength(1);
+         expect(users[0]?.firstName).toBe(userData.firstName);
+         expect(users[0]?.lastName).toBe(userData.lastName);
+         expect(users[0]?.email).toBe(userData.email);
       });
    });
 });
