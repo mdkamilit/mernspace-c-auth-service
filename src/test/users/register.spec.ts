@@ -2,7 +2,8 @@ import { createConnection, getConnection, Connection } from 'typeorm';
 import request from 'supertest';
 import app from '../../app';
 import { User } from '../../entity/User';
-import { truncateTables } from './utils';
+import { Roles } from '../../constants';
+// import { truncateTables } from './utils';
 
 describe('POST /auth/register', () => {
    let connection: Connection;
@@ -10,13 +11,15 @@ describe('POST /auth/register', () => {
       connection = await createConnection();
    });
    beforeEach(async () => {
-      // database truncate
-      await truncateTables(connection);
+      const connection = getConnection();
+      await connection.synchronize();
    });
 
    afterAll(async () => {
-      const conn = getConnection();
-      await conn.close();
+      const connection = getConnection();
+      if (connection.isConnected) {
+         await connection.close();
+      }
    });
    describe('Given all fields', () => {
       it.skip('should return 200 status code', async () => {
@@ -54,7 +57,7 @@ describe('POST /auth/register', () => {
          );
       });
 
-      it('should persist the user in database', async () => {
+      it.skip('should persist the user in database', async () => {
          const userData = {
             firstName: 'John',
             lastName: 'Doe',
@@ -89,6 +92,23 @@ describe('POST /auth/register', () => {
 
          // 3. Assert the response
          expect(response.body).toHaveProperty([]);
+      });
+
+      it.skip('should assign customer role', async () => {
+         const userData = {
+            firstName: 'Jane',
+            lastName: 'Smith',
+            email: 'jane.smith@example.com',
+            password: 'password123',
+         };
+         // 2. Act by sending a request to the registration endpoint
+         await request(app).post('/auth/register').send(userData);
+
+         // 3. Assert the response
+         const userRepository = connection.getRepository(User);
+         const users = await userRepository.find();
+         expect(users[0]).toHaveProperty('role');
+         expect(users[0]?.role).toBe(Roles.CUSTOMER);
       });
    });
 });

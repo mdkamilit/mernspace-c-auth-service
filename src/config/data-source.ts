@@ -28,6 +28,7 @@ createConnection({
    // synchronize: Config.NODE_ENV == 'test' || Config.NODE_ENV == 'dev',
    synchronize: true,
    logging: true,
+   dropSchema: true,
 })
    .then(() => {
       console.log('Database connected');
