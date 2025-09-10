@@ -74,6 +74,22 @@ describe('POST /auth/register', () => {
          expect(users[0]?.lastName).toBe(userData.lastName);
          expect(users[0]?.email).toBe(userData.email);
       });
+      //write a test case from scratch using the Test-Driven Development (TDD) approach for the /auth/register endpoint, focusing on asserting that the response includes the id of the newly created user.
+      it.skip('should return the id of the newly created user', async () => {
+         const userData = {
+            firstName: 'Jane',
+            lastName: 'Smith',
+            email: 'jane.smith@example.com',
+            password: 'password123',
+         };
+         // 2. Act by sending a request to the registration endpoint
+         const response = await request(app)
+            .post('/auth/register')
+            .send(userData);
+
+         // 3. Assert the response
+         expect(response.body).toHaveProperty([]);
+      });
    });
 });
 describe('Fields are missing', () => {});

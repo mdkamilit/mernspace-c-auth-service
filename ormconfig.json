@@ -1,18 +1,11 @@
 {
-   "type": "postgres",
-   "host": "localhost",
-   "port": 5432,
-   "username": "root",
-   "password": "root",
-   "database": "mernstack_auth_service_test",
-   "synchronize": true,
-   "logging": false,
-   "entities": ["src/entity/**/*.ts"],
-   "migrations": ["src/migration/**/*.ts"],
-   "subscribers": ["src/subscriber/**/*.ts"],
-   "cli": {
-      "entitiesDir": "src/entity",
-      "migrationsDir": "src/migration",
-      "subscribersDir": "src/subscriber"
-   }
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5532,
+  "username": "root",
+  "password": "root",
+  "database": "mernstack_auth_service",
+  "synchronize": true,
+  "logging": false,
+  "entities": ["src/entity/**/*.ts"]
 }

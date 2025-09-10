@@ -25,7 +25,8 @@ createConnection({
    entities: [User],
    //dont use synchronize in production - may lose data
    //use migrations instead
-   synchronize: Config.NODE_ENV == 'test' || Config.NODE_ENV == 'dev',
+   // synchronize: Config.NODE_ENV == 'test' || Config.NODE_ENV == 'dev',
+   synchronize: true,
    logging: true,
 })
    .then(() => {
