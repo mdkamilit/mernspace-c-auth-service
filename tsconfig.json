@@ -1,4 +1,4 @@
-{
+ {
    // Visit https://aka.ms/tsconfig to read more about this file
    "compilerOptions": {
       // File Layout
@@ -9,11 +9,11 @@
       // See also https://aka.ms/tsconfig/module
       "target": "ESNext",
       "module": "ESNext",
-      "moduleResolution": "Node", // or "Node16", "NodeNext"
+      "moduleResolution": "node", // or "Node16", "NodeNext"
       "esModuleInterop": true,
 
       // "types": [],
-      "types": ["jest", "node"],
+     
       // For nodejs:
       "lib": ["ES6"],
       // "types": ["node"],
@@ -48,6 +48,7 @@
       "allowImportingTsExtensions": true,
       "noEmit": true,
       "emitDecoratorMetadata": true,
-      "experimentalDecorators": true
+      "experimentalDecorators": true,
+       "types": ["node", "jest"]
    }
 }

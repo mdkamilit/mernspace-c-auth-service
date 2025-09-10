@@ -1,9 +1,9 @@
 import express from 'express';
 import { getConnection } from 'typeorm';
-import { AuthController } from '../controllers/AuthController';
-import { UserService } from '../services/UserService';
-import { User } from '../entity/User';
-import logger from '../config/logger';
+import { AuthController } from '../controllers/AuthController.ts';
+import { UserService } from '../services/UserService.ts';
+import { User } from '../entity/User.ts';
+import logger from '../config/logger.ts';
 
 const router = express.Router();
 

@@ -57,7 +57,7 @@ describe('POST /auth/register', () => {
          );
       });
 
-      it.skip('should persist the user in database', async () => {
+      it('should persist the user in database', async () => {
          const userData = {
             firstName: 'John',
             lastName: 'Doe',
@@ -107,7 +107,7 @@ describe('POST /auth/register', () => {
          // 3. Assert the response
          const userRepository = connection.getRepository(User);
          const users = await userRepository.find();
-         expect(users[0]).toHaveProperty('role');
+         expect(users).toHaveProperty('role');
          expect(users[0]?.role).toBe(Roles.CUSTOMER);
       });
    });

@@ -5,7 +5,10 @@ import createHttpError from 'http-errors';
 import { Roles } from '../constants';
 
 export class UserService {
-   constructor(private userRepository: Repository<User>) {}
+   private userRepository: Repository<User>;
+   constructor(userRepository: Repository<User>) {
+      this.userRepository = userRepository;
+   }
 
    async create({
       firstName,
