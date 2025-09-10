@@ -1,11 +1,11 @@
 {
-  "type": "postgres",
-  "host": "localhost",
-  "port": 5532,
-  "username": "root",
-  "password": "root",
-  "database": "mernstack_auth_service",
-  "synchronize": true,
-  "logging": false,
-  "entities": ["src/entity/**/*.ts"]
+   "type": "postgres",
+   "host": "localhost",
+   "port": 5532,
+   "username": "root",
+   "password": "root",
+   "database": "mernstack_auth_service",
+   "synchronize": true,
+   "logging": false,
+   "entities": ["src/entity/**/*.ts"]
 }
