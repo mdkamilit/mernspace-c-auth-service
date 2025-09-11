@@ -114,7 +114,7 @@ describe('POST /auth/register', () => {
       });
 
       // hasing of password
-      it.skip('should hash the password before storing it', async () => {
+      it('should hash the password before storing it', async () => {
          const userData = {
             firstName: 'Alice',
             lastName: 'Johnson',
@@ -127,8 +127,10 @@ describe('POST /auth/register', () => {
          // 3. Assert the response
          const userRepository = connection.getRepository(User);
          const users = await userRepository.find();
-         // expect(users[0]).toHaveLength(1);
+         console.log(users[0]?.password);
          expect(users[0]?.password).not.toBe(userData.password);
+         expect(users[0]?.password).toHaveLength(60);
+         expect(users[0]?.password).toMatch(/^\$2[ayb]\$.{56}$/);
          // You can add more checks here to verify the hashing algorithm if needed
       });
    });

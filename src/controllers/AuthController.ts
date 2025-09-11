@@ -3,6 +3,7 @@ import type { RegisterRequest } from '../types';
 import { UserService } from '../services/UserService.ts';
 import { User } from '../entity/User.ts';
 import type { Logger } from 'winston';
+
 export class AuthController {
    private userService: UserService;
    private logger: Logger;
@@ -21,7 +22,7 @@ export class AuthController {
          password: '****',
          role,
       });
-      //   const hashPassword=await bcrypt.hash(password,10);
+
       try {
          const user: User = await this.userService.create({
             firstName,

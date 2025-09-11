@@ -3,7 +3,7 @@ import { Repository } from 'typeorm';
 import { User } from '../entity/User.ts';
 import type { UserData } from '../types';
 import createHttpError from 'http-errors';
-
+import bcrypt from 'bcrypt';
 export class UserService {
    private userRepository: Repository<User>;
    constructor(userRepository: Repository<User>) {
@@ -17,12 +17,14 @@ export class UserService {
       password,
       role = Roles.CUSTOMER,
    }: UserData): Promise<User> {
+      const saltRounds = 10;
+      const hashPassword = await bcrypt.hash(password, saltRounds);
       try {
          const user = this.userRepository.create({
             firstName,
             lastName,
             email,
-            password,
+            password: hashPassword,
             role,
          });
 
