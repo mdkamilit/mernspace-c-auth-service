@@ -17,6 +17,12 @@ export class UserService {
       password,
       role = Roles.CUSTOMER,
    }: UserData): Promise<User> {
+      const user = await this.userRepository.findOne({
+         where: { email: email },
+      });
+      if (user) {
+         throw createHttpError(400, 'Email already exists');
+      }
       const saltRounds = 10;
       const hashPassword = await bcrypt.hash(password, saltRounds);
       try {
