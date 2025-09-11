@@ -1,4 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Roles } from '../constants/index.ts';
 
 @Entity()
 export class User {
@@ -17,6 +18,6 @@ export class User {
    @Column()
    password: string;
 
-   @Column()
+   @Column({ type: 'varchar', default: Roles.ADMIN })
    role: string;
 }

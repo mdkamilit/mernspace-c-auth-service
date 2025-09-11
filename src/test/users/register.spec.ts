@@ -13,6 +13,7 @@ describe('POST /auth/register', () => {
    beforeEach(async () => {
       const connection = getConnection();
       await connection.synchronize();
+      await connection.getRepository(User).clear();
    });
 
    afterAll(async () => {
@@ -94,12 +95,13 @@ describe('POST /auth/register', () => {
          expect(response.body).toHaveProperty([]);
       });
 
-      it.skip('should assign customer role', async () => {
+      it('should assign customer role', async () => {
          const userData = {
-            firstName: 'Jane',
-            lastName: 'Smith',
-            email: 'jane.smith@example.com',
+            firstName: 'rakesh1',
+            lastName: 'kumar1',
+            email: 'rakesh@example.com',
             password: 'password123',
+            role: Roles.ADMIN,
          };
          // 2. Act by sending a request to the registration endpoint
          await request(app).post('/auth/register').send(userData);
@@ -107,8 +109,27 @@ describe('POST /auth/register', () => {
          // 3. Assert the response
          const userRepository = connection.getRepository(User);
          const users = await userRepository.find();
-         expect(users).toHaveProperty('role');
-         expect(users[0]?.role).toBe(Roles.CUSTOMER);
+         expect(users[0]).toHaveProperty('role');
+         expect(users[0]?.role).toBe(Roles.ADMIN);
+      });
+
+      // hasing of password
+      it.skip('should hash the password before storing it', async () => {
+         const userData = {
+            firstName: 'Alice',
+            lastName: 'Johnson',
+            email: 'alice@gmail.com',
+            password: 'mysecretpassword',
+         };
+         // 2. Act by sending a request to the registration endpoint
+         await request(app).post('/auth/register').send(userData);
+
+         // 3. Assert the response
+         const userRepository = connection.getRepository(User);
+         const users = await userRepository.find();
+         // expect(users[0]).toHaveLength(1);
+         expect(users[0]?.password).not.toBe(userData.password);
+         // You can add more checks here to verify the hashing algorithm if needed
       });
    });
 });

@@ -14,7 +14,7 @@
    "author": "kamil <mdkamilit61@gmail.com>",
    "type": "module",
    "main": "dist/server.js",
-   "scripts": {      
+   "scripts": {
       "dev": "cross-env NODE_ENV=dev nodemon",
       "format:fix": "prettier . --write",
       "format:check": "prettier . --check",
@@ -54,6 +54,7 @@
       ]
    },
    "dependencies": {
+      "bcrypt": "^6.0.0",
       "dotenv": "^17.2.1",
       "express": "^5.1.0",
       "pg": "^8.4.0",

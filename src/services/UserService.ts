@@ -1,8 +1,8 @@
+import { Roles } from './../constants/index.ts';
 import { Repository } from 'typeorm';
-import { User } from '../entity/User';
+import { User } from '../entity/User.ts';
 import type { UserData } from '../types';
 import createHttpError from 'http-errors';
-import { Roles } from '../constants';
 
 export class UserService {
    private userRepository: Repository<User>;
@@ -15,6 +15,7 @@ export class UserService {
       lastName,
       email,
       password,
+      role = Roles.CUSTOMER,
    }: UserData): Promise<User> {
       try {
          const user = this.userRepository.create({
@@ -22,7 +23,7 @@ export class UserService {
             lastName,
             email,
             password,
-            role: Roles.CUSTOMER,
+            role,
          });
 
          return await this.userRepository.save(user);
