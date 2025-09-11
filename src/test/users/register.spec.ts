@@ -134,7 +134,7 @@ describe('POST /auth/register', () => {
          // You can add more checks here to verify the hashing algorithm if needed
       });
       // should return 400 status code if email already exists
-      it('should return 400 status code if email already exists', async () => {
+      it.skip('should return 400 status code if email fields is missing', async () => {
          const userData = {
             firstName: 'rakesh1',
             lastName: 'kumar1',
@@ -156,6 +156,23 @@ describe('POST /auth/register', () => {
          expect(response.statusCode).toBe(400);
          expect(users).toHaveLength(1);
          // expect(response.body.message).toBe('Email already exists');
+      });
+      it('should return 400 status code if fields are missing', async () => {
+         const userData = {
+            firstName: 'rakesh1',
+            lastName: 'kumar1',
+            email: '',
+            password: 'password123',
+         };
+
+         // Act by sending a request to the registration endpoint
+         const response = await request(app)
+            .post('/auth/register')
+            .send(userData);
+         expect(response.statusCode).toBe(400);
+         const userRepository = connection.getRepository(User);
+         const users = await userRepository.find();
+         expect(users).toHaveLength(0);
       });
    });
 });

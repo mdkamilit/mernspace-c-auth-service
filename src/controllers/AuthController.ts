@@ -1,8 +1,10 @@
+import { validationResult } from 'express-validator';
 import { type NextFunction, type Response } from 'express';
 import type { RegisterRequest } from '../types';
 import { UserService } from '../services/UserService.ts';
 import { User } from '../entity/User.ts';
 import type { Logger } from 'winston';
+import createHttpError from 'http-errors';
 
 export class AuthController {
    private userService: UserService;
@@ -22,6 +24,15 @@ export class AuthController {
          password: '****',
          role,
       });
+
+      const result = validationResult(req);
+      if (!result.isEmpty()) {
+         return res.status(400).json({ errors: result.array() });
+      }
+      if (!email) {
+         //   return  res.status(400).json({message:"Email is required"});
+         throw createHttpError(400, 'Email is required');
+      }
 
       try {
          const user: User = await this.userService.create({
