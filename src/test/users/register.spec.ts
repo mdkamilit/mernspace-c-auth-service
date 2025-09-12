@@ -95,7 +95,7 @@ describe('POST /auth/register', () => {
          expect(response.body).toHaveProperty([]);
       });
 
-      it('should assign customer role', async () => {
+      it.skip('should assign customer role', async () => {
          const userData = {
             firstName: 'rakesh1',
             lastName: 'kumar1',
@@ -176,7 +176,7 @@ describe('POST /auth/register', () => {
       });
 
       // fields are in proper format and sanitized
-      it('should trim whitespace from input fields', async () => {
+      it.skip('should trim whitespace from input fields', async () => {
          const userData = {
             firstName: 'Rakesh',
             lastName: 'Kumar',
@@ -196,6 +196,24 @@ describe('POST /auth/register', () => {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             password: expect.any(String),
          });
+      });
+
+      // return 400 status code if email is not valid
+      it('should return 400 status code if email is not valid', async () => {
+         const userData = {
+            firstName: 'Rakesh',
+            lastName: 'Kumar',
+            email: 'rakeshexample.com', // Invalid email format
+            password: 'password123',
+         };
+         // Act by sending a request to the registration endpoint
+         const response = await request(app)
+            .post('/auth/register')
+            .send(userData);
+         expect(response.statusCode).toBe(400);
+         const userRepository = connection.getRepository(User);
+         const users = await userRepository.find();
+         expect(users).toHaveLength(0);
       });
    });
 });

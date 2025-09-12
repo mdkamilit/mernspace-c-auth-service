@@ -26,12 +26,16 @@ export class AuthController {
       });
 
       const result = validationResult(req);
+      console.log('Validation Errors:', result.array());
       if (!result.isEmpty()) {
          return res.status(400).json({ errors: result.array() });
       }
       if (!email) {
          //   return  res.status(400).json({message:"Email is required"});
          throw createHttpError(400, 'Email is required');
+      }
+      if (!password) {
+         throw createHttpError(400, 'Password is required');
       }
 
       try {
